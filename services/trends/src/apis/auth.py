@@ -46,10 +46,6 @@ class SignUp(BaseModel):
     email: str
     password: str
     name: Optional[str] = None
-    nickname: Optional[str] = None
-    birthday: Optional[datetime.date] = None
-    gender: Optional[Gender] = None
-    phone: Optional[str] = None
 
 
 @router.post("/auth/sign-up", tags=["auth"])

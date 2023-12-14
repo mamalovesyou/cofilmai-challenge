@@ -1,25 +1,20 @@
 import os
+
+from fastapi.concurrency import asynccontextmanager
 from src.apis import apis
-from prisma import Prisma
+from src.prisma import prisma
 from fastapi import FastAPI
 
-app = FastAPI()
-app.include_router(apis, prefix="/apis")
-prisma = Prisma(datasource={
-        'url': os.environ.get('DATABASE_URL'),
-    })
 
-print(os.environ.get('DATABASE_URL'))
-
-@app.on_event("startup")
-async def startup():
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    print("Connect")
     await prisma.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown():
+    yield
     await prisma.disconnect()
 
+app = FastAPI(lifespan=lifespan)
+app.include_router(apis, prefix="/v1")
 
 @app.get("/")
 def read_root():

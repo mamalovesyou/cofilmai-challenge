@@ -1,7 +1,7 @@
 FROM python:3.10-slim as base
 
 # Install tools
-RUN apt update 
+RUN apt update
 RUN apt install -y build-essential \
     pkg-config \
     libpq-dev \

@@ -1,15 +1,10 @@
-import datetime
-from typing import List, Optional
+from typing import Optional
+
 from fastapi import APIRouter
 from prisma.models import User
 from pydantic import BaseModel
-from src.models.scalar import Gender
 from src.prisma import prisma
-from src.utils.auth import (
-    encryptPassword,
-    signJWT,
-    validatePassword,
-)
+from src.utils.auth import encryptPassword, signJWT, validatePassword
 
 router = APIRouter()
 

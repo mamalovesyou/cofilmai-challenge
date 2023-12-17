@@ -1,6 +1,6 @@
 import asyncio
+
 from prisma import Prisma
-from prisma.models import TrendingData
 
 
 async def main() -> None:
@@ -8,8 +8,10 @@ async def main() -> None:
     await db.connect()
 
     data = await db.trendingdata.find_many()
+    print(data)
 
     await db.disconnect()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.run(main())

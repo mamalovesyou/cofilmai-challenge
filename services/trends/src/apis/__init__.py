@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from src.apis.auth import router as authRouter
 from src.apis.users import router as usersRouter
 

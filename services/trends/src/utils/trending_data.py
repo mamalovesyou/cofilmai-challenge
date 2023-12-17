@@ -1,23 +1,26 @@
-import os
-import requests
-from dotenv import load_dotenv
 import json
 
+import requests
+from environs import Env
 
-load_dotenv()
+env = Env()
+# Read .env into os.environ
+env.read_env()
 
-TOKEN = os.getenv("ENSEMBLE_TOKEN") or os.environ.get("ENSEMBLE_TOKEN")
-POSTS_URL = os.getenv("ENSEMBLE_POSTS_URL") or os.environ.get("ENSEMBLE_POSTS_URL")
+TOKEN = env.str("ENSEMBLE_TOKEN", "")
+POSTS_URL = env.str("ENSEMBLE_POSTS_URL", "")
+
 
 def get_test_data():
     with open("/home/kamol/projects/cofilmai-challenge/hashtags.json") as f:
         return json.load(f)
 
+
 def get_tranding_posts(hashtag, params):
     trending_posts = []
 
     headers = {
-        'accept': 'application/json',
+        "accept": "application/json",
     }
 
     response = requests.get(POSTS_URL, params=params, headers=headers)
@@ -42,18 +45,18 @@ def get_tranding_posts(hashtag, params):
                 "hashtag": hashtag,
                 "postAuthorNickname": datum["author"].get("nickname"),
                 "music_author": datum["added_sound_music_info"].get("author"),
-                "description": datum.get("desc")
+                "description": datum.get("desc"),
             }
         )
 
     return trending_posts
 
 
-def get_trending_data(hashtag): 
+def get_trending_data(hashtag):
     """
     hashtag: Keyword to filter posts by their hashtag
     # NOTE: Add batch_size for amount of posts get scrapped.
-    # batch_size: Amount of posts to pull. 
+    # batch_size: Amount of posts to pull.
         # Options:
         #     1: 20
         #     2: 40
@@ -62,9 +65,9 @@ def get_trending_data(hashtag):
     """
     trending_posts = []
     params = {
-        'name': hashtag,
-        'cursor': "0",
-        'token': TOKEN,
+        "name": hashtag,
+        "cursor": "0",
+        "token": TOKEN,
     }
 
     data = get_tranding_posts(hashtag, params)

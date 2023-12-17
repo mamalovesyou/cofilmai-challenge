@@ -14,6 +14,8 @@ services:
     environment:
       - JWT_SECRET=secret
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/cofilm
+    depends_on:
+      - postgres
 
   tiktok-worker:
     build: 
@@ -24,22 +26,26 @@ services:
       - ./workers/tiktok:/code/tiktok
     environment:
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/cofilm
+    depends_on:
+      - postgres
     
 
-  # swagger-ui:
-  #   image: swaggerapi/swagger-ui
-  #   container_name: "swagger-ui"
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - ./openapi/api.cofilmai.yaml:/openapi.json
-  #   environment:
-  #     SWAGGER_JSON: /openapi.json
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger-ui"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./openapi:/openapi
+    environment:
+      SWAGGER_JSON: /openapi/openapi.json
+    depends_on:
+      - api
 
   postgres:
     image: postgres:14-alpine
     ports:
-      - 5432:5432
+      - 6500:5432
     volumes:
       - postgres:/var/lib/postgresql/data
     environment:

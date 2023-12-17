@@ -18,8 +18,12 @@ Bonuses aren't required but are highly encouraged, pick one of them.
 
 - Update api code to generate a `openapi/api.cofilmai.yaml` file using FastAPI
 - Uncomment swagger-ui service in the `docker-compose.yml` and make sure your swagger-ui is running properly
-- Fetch and store trending data from TikTok using https://github.com/davidteather/TikTok-Api by country
-  - The fetch should happen as a background tasks every X time. 
+- Fetch and store trending posts from TikTok  by country
+  1. Create a free account here https://serpapi.com/
+  2. Create a free account on this website: https://www.ensembledata.com/ and use their api to search for given list of hastags
+  3. Create a Trends model to store trends (should be fetch every hour) 
+  4. Use ensembledata API to fetch TikTok posts by hastags. The hastags are trends keywords converted in hashtags
+  - The trends should be fetched as a background tasks every X time in the worker. (You can implement the cron logic with a simple sleep) 
 - Extract Hashtags, Music, etc. from trending posts
 - Expose endpoints to interact with TikTok trends data.
   - List trending posts by country, date or number of views

@@ -1,8 +1,6 @@
 ## TikTok Trends Storage and Management Application
 
-This application fetches the latest TikTok trends by scrapping tiktok, stores them in a PostgreSQL database using prisma, and manages the data retrieval and update process using a FastAPI application to retrieve data and worker running independently to scrape and store new data. You will find a basic FastAPI application in `services/trends` that you will modify.
-
-The worker code will be in `workers/tiktok`
+This application fetches the latest google trends and convert them into trending hastags, stores them in a PostgreSQL database using prisma, and manages the data retrieval and update process using a FastAPI application. You will find a basic FastAPI application in `services/trends` that you will modify.
 
 No schema are imposed, you are free to come up with your own DB schema as long as you can justify your choices. Prisma is here to simplify your life, it comes with everything you need. Don;t over complicate things.
 
@@ -19,19 +17,13 @@ Bonuses aren't required but are highly encouraged, pick one of them.
 - Update api code to generate a `openapi/api.cofilmai.yaml` file using FastAPI
 - Uncomment swagger-ui service in the `docker-compose.yml` and make sure your swagger-ui is running properly
 - Fetch and store trending posts from TikTok  by country
-  1. Create a free account here https://serpapi.com/
-  2. Create a free account on this website: https://www.ensembledata.com/ and use their api to search for given list of hastags
-  3. Create a Trends model to store trends (should be fetch every hour) 
-  4. Use ensembledata API to fetch TikTok posts by hastags. The hastags are trends keywords converted in hashtags
-  - The trends should be fetched as a background tasks every X time in the worker. (You can implement the cron logic with a simple sleep) 
-- Extract Hashtags, Music, etc. from trending posts
-- Expose endpoints to interact with TikTok trends data.
-  - List trending posts by country, date or number of views
-  - List trending hashtags by country
+  1. Create a free account here https://serpapi.com/ and fetch google trends by country
+  2. Create an endpoint that list and save trends for a given keyword (Create a Trends model to store trends 
+  3. Make trends unique to a user
+  4. Create a hastag for each trends and list those hastags for each user (for instance if a trend is real estate, create #realestate)
+  5. Add a search endpoint to search trending hashtags
 
 ## Bonus
-- Modify your code to fetch trending posts using a given topic or set of hashtags
-- Add prisma studio in the docker-compose.yml file
 - Come up with a feature of your own!
 
 ## Submission

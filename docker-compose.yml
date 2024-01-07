@@ -1,12 +1,12 @@
 version: "3.6"
 
 services:
-
   api:
-    build: 
+    build:
       context: .
       target: api
-    entrypoint: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8888", "--reload"]
+    entrypoint:
+      ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8888", "--reload"]
     ports:
       - 8888:8888
     volumes:
@@ -14,17 +14,6 @@ services:
     environment:
       - JWT_SECRET=secret
       - DATABASE_URL=postgresql://postgres:password@postgres:5432/cofilm
-
-  tiktok-worker:
-    build: 
-      context: .
-      target: tiktok-worker
-    entrypoint: watchmedo auto-restart --recursive --pattern="*.py" --directory="." -- python -u main.py
-    volumes:
-      - ./workers/tiktok:/code/tiktok
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@postgres:5432/cofilm
-    
 
   # swagger-ui:
   #   image: swaggerapi/swagger-ui

@@ -31,11 +31,3 @@ FROM base as api
 COPY ./services/trends /code/trends
 
 WORKDIR /code/trends
-
-FROM base as tiktok-worker
-
-COPY ./workers/tiktok /code/tiktok
-
-WORKDIR /code/tiktok
-
-CMD ["python3", "main.py"]

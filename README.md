@@ -1,4 +1,4 @@
-## TikTok Trends Storage and Management Application
+## Trends Storage and Management Application
 
 This application fetches the latest google trends and convert them into trending hastags, stores them in a PostgreSQL database using prisma, and manages the data retrieval and update process using a FastAPI application. You will find a basic FastAPI application in `services/trends` that you will modify.
 
@@ -16,9 +16,9 @@ Bonuses aren't required but are highly encouraged, pick one of them.
 
 - Update api code to generate a `openapi/api.cofilmai.yaml` file using FastAPI
 - Uncomment swagger-ui service in the `docker-compose.yml` and make sure your swagger-ui is running properly
-- Fetch and store trending posts from TikTok  by country
+- Fetch and store trends by country
   1. Create a free account here https://serpapi.com/ and fetch google trends by country
-  2. Create an endpoint that list and save trends for a given keyword (Create a Trends model to store trends 
+  2. Create an endpoint that list and save trends for a given keyword (Create a Trends model to store trends) 
   3. Make trends unique to a user
   4. Create a hastag for each trends and list those hastags for each user (for instance if a trend is real estate, create #realestate)
   5. Add a search endpoint to search trending hashtags
@@ -37,7 +37,6 @@ Bonuses aren't required but are highly encouraged, pick one of them.
 - Python 3.10+
 - Docker compose
 - [Prisma](https://prisma-client-py.readthedocs.io/en/stable/)
-- [Tikntok-Api](https://github.com/davidteather/TikTok-Api)
 
 ## Setup virtual environment
 
